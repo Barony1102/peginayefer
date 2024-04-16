@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AUTOSBARON - Registrate</title>
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="estilo.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <header>
+        <h1>AUTOSBARON</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" >Inicio</a></li>
+                <li><a href="Servicios.html" >Servicios</a></li>
+                <li><a href="AcercaDeNosotros.html">Acerca de Nosotros</a></li>
+                <li><a href="Testimonios.html">Testimonios</a></li>
+                <li><a href="Registrarse.html" class="active">Registrarse</a></li>
+            </ul>
+        </nav>        
+    </header>
+
+    <main class="formulario-registro w-100 m-auto">
+        <form id="formulario-registro">
+            <h1 class="titulo-formulario">Registro de Usuario</h1>
+            <div class="campo-formulario">
+                <input type="text" class="campo-formulario__input" id="nombre" placeholder="Nombre">
+            </div>
+            <div class="campo-formulario">
+                <input type="email" class="campo-formulario__input" id="correo" placeholder="Correo Electrónico">
+            </div>
+            <div class="campo-formulario">
+                <input type="password" class="campo-formulario__input" id="contrasena" placeholder="Contraseña">
+            </div>
+            <button class="cta-button" type="submit">Registrarse</button>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('formulario-registro').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Obtener los valores del formulario
+            var nombre = document.getElementById('nombre').value;
+            var email = document.getElementById('correo').value;
+            var password = document.getElementById('contrasena').value;
+
+            // Generar un ID para el nuevo usuario
+            var id = generateUserId();
+
+            // Crear el nuevo usuario con los datos del formulario
+            var newUser = {
+                "id": id,
+                "name": nombre,
+                "email": email,
+                "password": password,
+                "role": "viewer"
+            };
+
+            // Guardar el nuevo usuario en el archivo JSON
+            fetch('db.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Agregar el nuevo usuario al arreglo existente
+                    data.users.push(newUser);
+
+                    // Guardar los datos actualizados en el archivo JSON
+                    return fetch('db.json', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                })
+                .then(() => {
+                    alert('Usuario registrado exitosamente.');
+                    // Redirigir al usuario a la página de inicio de sesión
+                    window.location.href = 'ingreso.html';
+                })
+                .catch(error => console.error('Error al guardar el nuevo usuario:', error));
+        });
+
+        // Función para generar un ID único para el nuevo usuario
+        function generateUserId() {
+            // Esta implementación genera un ID simple basado en la longitud del arreglo de usuarios
+            return Math.floor(Math.random() * 1000) + 1; // Genera un número aleatorio entre 1 y 1000
+        }
+    </script>
+    <footer>
+        <p>Para más información, contáctenos:</p>
+        <p><strong>Dirección:</strong> Carrera 88 a # 37-07 sur</p>
+        <p><strong>Teléfono:</strong> 3193909292</p>
+        <p><strong>Correo:</strong> Baron.yeferson.11.02@gmail.com</p>
+    </footer>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

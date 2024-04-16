@@ -1,0 +1,19 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "Administrador",
+        "email": "admin@poli.com",
+        "password": "admin123",
+        "role": "admin"
+      },
+      {
+        "id": 2,
+        "name": "Visualizador",
+        "email": "viewer@poli.com",
+        "password": "viwer123",
+        "role": "viewer"
+      }
+    ]
+}
+  

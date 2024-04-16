@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <main class="formulario-ingreso w-100 m-auto">
+        <form id="formulario-ingreso">
+            <h1 class="titulo-formulario">Ingreso</h1>
+            <div class="campo-formulario">
+                <input type="email" class="campo-formulario__input" id="correo" placeholder="Correo Electrónico">
+                
+            </div>
+            <div class="campo-formulario">
+                <input type="password" class="campo-formulario__input" id="contrasena" placeholder="Contraseña">
+                
+            </div>
+            <button class="boton-ingreso btn btn-primary w-100 py-2" type="submit">Ingresar</button>
+            <p class="aviso-autor mt-5 mb-3 text-body-secondary">&copy; YeferBaron</p>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('formulario-ingreso').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Obtener los valores del formulario
+            var email = document.getElementById('correo').value;
+            var password = document.getElementById('contrasena').value;
+
+            // Realizar la autenticación comparando con los usuarios en el archivo JSON
+            fetch('db.json')
+                .then(response => response.json())
+                .then(data => {
+                    var authenticatedUser = data.users.find(function(user) {
+                        return user.email === email && user.password === password;
+                    });
+
+                    if (authenticatedUser) {
+                        // Usuario autenticado, redirigir al archivo index
+                        console.log('Redireccionando al usuario autenticado...');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
+                    }
+                })
+                .catch(error => console.error('Error al cargar los datos del archivo JSON:', error));
+        });
+    </script>
+</body>
+</html>

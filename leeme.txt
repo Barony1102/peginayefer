@@ -1,0 +1,16 @@
+Mi nombre Yeferson baron
+la forma de ingresar a la pagina es iniciar por el ingreso.html que es el login
+En el archivo db.json estan alojadas las claves de ingreso
+
+
+
+email:admin@poli.com
+password: admin123
+        
+       
+email: viewer@poli.com
+password: viwer123
+       
+Nota: ya que todas las vistas menejan la misma estructura solo se comentara la vista index.html.
+Tener en cuenta que algunas lineas de codigo se obtuvieron de los ejemplos que bootstrap presenta en su documentacion.
+de esto a ver el nombre de las clases y de los estilos.
